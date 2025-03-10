@@ -7,6 +7,19 @@ console.log("TRELLO_TOKEN:", TRELLO_TOKEN);
 const API_BASE_URL = "https://api.trello.com/1";
 
 const TrelloService = {
+  getBoards: async (workspaceId) => {
+    try {
+      const response = await axios.get(
+        `${API_BASE_URL}/organizations/${workspaceId}/boards?key=${TRELLO_API_KEY}&token=${TRELLO_TOKEN}`
+      );
+      return response.data;
+    } catch (error) {
+      console.error("Erreur lors de la récupération des Boards:", error);
+      return [];
+    }
+  },
+
+
   getWorkspaces: async () => {
     try {
       const response = await axios.get(
