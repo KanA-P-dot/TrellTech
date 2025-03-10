@@ -1,10 +1,11 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Button } from "react-native";
 
-const HomeScreen = () => {
+const HomeScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Bienvenue sur notre page d'accueil</Text>
+      <Text style={styles.text}>Bienvenue sur l'écran d'accueil 🎉</Text>
+      <Button title="Voir mes Workspaces" onPress={() => navigation.navigate("Workspaces")} />
     </View>
   );
 };
@@ -14,9 +15,13 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "#f8f9fa",
   },
   text: {
     fontSize: 20,
+    fontWeight: "bold",
+    color: "#333",
+    marginBottom: 20,
   },
 });
 
