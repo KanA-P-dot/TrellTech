@@ -19,6 +19,17 @@ const TrelloService = {
     }
   },
 
+  getLists: async (boardId) => {
+    try {
+      const response = await axios.get(
+        `${API_BASE_URL}/boards/${boardId}/lists?key=${TRELLO_API_KEY}&token=${TRELLO_TOKEN}`
+      );
+      return response.data;
+    } catch (error) {
+      console.error("Erreur lors de la récupération des listes:", error);
+      return [];
+    }
+  },
 
   getWorkspaces: async () => {
     try {
