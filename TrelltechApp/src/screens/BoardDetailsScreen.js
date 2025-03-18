@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, FlatList, StyleSheet, ActivityIndicator } from "react-native";
 import TrelloService from "../services/trelloService";
+import { TouchableOpacity } from "react-native"; 
 
-const BoardDetailsScreen = ({ route }) => {
+const BoardDetailsScreen = ({ route, navigation}) => {
   const { boardId, boardName } = route.params;
   const [lists, setLists] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -32,9 +33,17 @@ const BoardDetailsScreen = ({ route }) => {
         data={lists}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <View style={styles.listItem}>
+          <TouchableOpacity
+            style={styles.listItem}
+            onPress={() =>
+              navigation.navigate("ListDetails", {
+                listId: item.id,
+                listName: item.name,
+              })
+            }
+          >
             <Text style={styles.listName}>{item.name}</Text>
-          </View>
+          </TouchableOpacity>
         )}
       />
     </View>

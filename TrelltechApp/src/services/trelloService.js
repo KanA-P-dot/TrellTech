@@ -41,6 +41,19 @@ const TrelloService = {
       console.error("Erreur lors de la récupération des workspaces:", error);
     }
   },
+
+  getCards: async (listId) => {
+    try {
+      const response = await axios.get(
+        `${API_BASE_URL}/lists/${listId}/cards?key=${TRELLO_API_KEY}&token=${TRELLO_TOKEN}`
+      );
+      return response.data;
+    } catch (error) {
+      console.error("Erreur lors de la récupération des cartes:", error);
+      return [];
+    }
+  },
+
 };
 
 export default TrelloService;
