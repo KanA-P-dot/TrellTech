@@ -31,6 +31,18 @@ const TrelloService = {
     }
   },
 
+  getCardDetails: async (cardId) => {
+    try {
+      const response = await axios.get(
+        `${API_BASE_URL}/cards/${cardId}?key=${TRELLO_API_KEY}&token=${TRELLO_TOKEN}`
+      );
+      return response.data;
+    } catch (error) {
+      console.error("Erreur lors de la récupération de la carte:", error);
+      return null;
+    }
+  },
+
   getWorkspaces: async () => {
     try {
       const response = await axios.get(

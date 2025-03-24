@@ -6,6 +6,7 @@ import WorkspacesScreen from "../screens/WorkspacesScreen";
 import WorkspaceDetailsScreen from "../screens/WorkspaceDetailsScreen";
 import BoardDetailsScreen from "../screens/BoardDetailsScreen";
 import ListDetailsScreen from "../screens/ListDetailsScreen";
+import CardDetailsScreen from "../screens/CardDetailsScreen";
 
 const Stack = createStackNavigator();
 
@@ -17,6 +18,7 @@ const AppNavigator = () => {
       <Stack.Screen name="WorkspaceDetails" component={WorkspaceDetailsScreen} />
       <Stack.Screen name="BoardDetails" component={BoardDetailsScreen} />
       <Stack.Screen name="ListDetails" component={ListDetailsScreen} />
+      <Stack.Screen name="CardDetails" component={CardDetailsScreen} />
     </Stack.Navigator>
   );
 };
