@@ -66,6 +66,24 @@ const TrelloService = {
     }
   },
 
+  addCard: async (listId, cardName, cardDesc = "") => {
+    try {
+      const response = await axios.post(
+        `${API_BASE_URL}/cards?key=${TRELLO_API_KEY}&token=${TRELLO_TOKEN}`,
+        {
+          idList: listId,
+          name: cardName,
+          desc: cardDesc,
+        }
+      );
+      return response.data;
+    } catch (error) {
+      console.error("Erreur lors de l'ajout de la carte:", error);
+      return null;
+    }
+  },
+
+
 };
 
 export default TrelloService;
