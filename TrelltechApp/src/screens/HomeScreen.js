@@ -4,7 +4,7 @@ import { View, Text, StyleSheet, Button } from "react-native";
 const HomeScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Bienvenue sur l'écran d'accueil 🎉</Text>
+      <Text style={styles.text}>Bienvenue sur l'écran d'accueil </Text>
       <Button title="Voir mes Workspaces" onPress={() => navigation.navigate("Workspaces")} />
     </View>
   );

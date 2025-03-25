@@ -83,6 +83,19 @@ const TrelloService = {
     }
   },
 
+  deleteCard: async (cardId) => {
+    try {
+      await axios.delete(
+        `${API_BASE_URL}/cards/${cardId}?key=${TRELLO_API_KEY}&token=${TRELLO_TOKEN}`
+      );
+      return true; 
+    } catch (error) {
+      console.error("Erreur lors de la suppression de la carte:", error);
+      return false;
+    }
+  },
+
+
 
 };
 

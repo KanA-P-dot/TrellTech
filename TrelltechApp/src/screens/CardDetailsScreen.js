@@ -1,20 +1,51 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, ActivityIndicator } from "react-native";
+import { View, Text, StyleSheet, ActivityIndicator, Button, Alert } from "react-native";
 import TrelloService from "../services/trelloService";
 
-const CardDetailsScreen = ({ route }) => {
+const CardDetailsScreen = ({ route, navigation }) => {
   const { cardId, cardName } = route.params;
   const [card, setCard] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchCardDetails = async () => {
-      const data = await TrelloService.getCardDetails(cardId);
-      setCard(data);
-      setLoading(false);
+      try {
+        const data = await TrelloService.getCardDetails(cardId);
+        setCard(data);
+      } catch (error) {
+        console.error("Erreur lors du chargement de la carte :", error);
+      } finally {
+        setLoading(false);
+      }
     };
     fetchCardDetails();
   }, [cardId]);
+
+  const handleDeleteCard = async () => {
+    Alert.alert(
+      "Supprimer la carte",
+      "Es-tu sûr de vouloir supprimer cette carte ?",
+      [
+        { text: "Annuler", style: "cancel" },
+        {
+          text: "Supprimer",
+          onPress: async () => {
+            try {
+              const success = await TrelloService.deleteCard(cardId);
+              if (success) {
+                Alert.alert("Carte supprimée !");
+                navigation.goBack(); // Retour à la liste
+              } else {
+                Alert.alert("Erreur lors de la suppression.");
+              }
+            } catch (error) {
+              console.error("Erreur lors de la suppression :", error);
+            }
+          },
+        },
+      ]
+    );
+  };
 
   if (loading) {
     return (
@@ -27,11 +58,14 @@ const CardDetailsScreen = ({ route }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>{card.name}</Text>
-      <Text style={styles.description}>{card.desc || "Pas de description"}</Text>
+      <Text style={styles.title}>{card?.name || cardName}</Text>
+      <Text style={styles.description}>{card?.desc || "Pas de description"}</Text>
       <Text style={styles.date}>
-        Date limite : {card.due ? new Date(card.due).toLocaleDateString() : "Non définie"}
+        Date limite : {card?.due ? new Date(card.due).toLocaleDateString() : "Non définie"}
       </Text>
+
+      {/* Bouton de suppression */}
+      <Button title="Supprimer Carte" color="red" onPress={handleDeleteCard} />
     </View>
   );
 };
