@@ -95,6 +95,22 @@ const TrelloService = {
     }
   },
 
+  updateCard: async (cardId, newName, newDesc) => {
+    try {
+      const response = await axios.put(
+        `${API_BASE_URL}/cards/${cardId}?key=${TRELLO_API_KEY}&token=${TRELLO_TOKEN}`,
+        {
+          name: newName,
+          desc: newDesc,
+        }
+      );
+      return response.data; 
+    } catch (error) {
+      console.error("Erreur lors de la mise à jour de la carte:", error);
+      return null;
+    }
+  },
+
 
 
 };
