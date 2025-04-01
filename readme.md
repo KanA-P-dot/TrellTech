@@ -5,7 +5,7 @@ Elle permet aux utilisateurs d'afficher et gérer **leurs espaces de travail, le
 
 ---
 
-## ✨ **Fonctionnalités**
+##  **Fonctionnalités**
 ✔️ Affichage des **Espaces de travail (Workspaces)**  
 ✔️ Affichage des **Tableaux (Boards)** associés à un Workspace  
 ✔️ Affichage des **Listes** d’un Board  
@@ -14,7 +14,7 @@ Elle permet aux utilisateurs d'afficher et gérer **leurs espaces de travail, le
 
 ---
 
-## 🚀 **Technologies utilisées**
+##  **Technologies utilisées**
 - **React Native** (avec Expo)
 - **React Navigation** (gestion des écrans)
 - **Axios** (requêtes API)
