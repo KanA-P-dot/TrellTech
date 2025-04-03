@@ -28,6 +28,13 @@ const ListDetailsScreen = ({ route, navigation }) => {
     }
   };
 
+  const handleDeleteList = async (listId) => {
+    const result = await TrelloService.deleteList(listId);
+    if (result) {
+      setLists(lists.filter((list) => list.id !== listId)); // Suppression de la liste localement
+    }
+  };
+
   if (loading) {
     return (
       <View style={styles.container}>
@@ -74,6 +81,7 @@ const ListDetailsScreen = ({ route, navigation }) => {
           onChangeText={setNewCardDesc}
         />
         <Button title="Ajouter Carte" onPress={handleAddCard} />
+        <Button title="Supprimer Liste" color="red" onPress={handleDeleteList} />
       </View>
     </View>
   );

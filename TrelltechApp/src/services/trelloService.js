@@ -31,6 +31,55 @@ const TrelloService = {
     }
   },
 
+  addList: async (boardId, listName) => {
+    try {
+      const response = await axios.post(
+        `${API_BASE_URL}/lists?key=${TRELLO_API_KEY}&token=${TRELLO_TOKEN}`,
+        {
+          idBoard: boardId,
+          name: listName,
+        }
+      );
+      return response.data;
+    } catch (error) {
+      console.error("Erreur lors de l'ajout de la liste:", error);
+      return null;
+    }
+  },
+
+  deleteList: async (listId) => {
+    try {
+      const response = await axios.put(
+        `${API_BASE_URL}/lists/${listId}?key=${TRELLO_API_KEY}&token=${TRELLO_TOKEN}`,
+        {
+          closed: true, // Archiver la liste en la fermant
+        }
+      );
+      return response.data;
+    } catch (error) {
+      console.error("Erreur lors de l'archivage de la liste:", error);
+      return null;
+    }
+  },
+
+  updateList: async (listId, newName) => {
+    try {
+      const response = await axios.put(
+        `${API_BASE_URL}/lists/${listId}?key=${TRELLO_API_KEY}&token=${TRELLO_TOKEN}`,
+        {
+          name: newName, // Nouveau nom de la liste
+        }
+      );
+      return response.data;
+    } catch (error) {
+      console.error("Erreur lors de la mise à jour de la liste:", error);
+      return null;
+    }
+  },
+  
+
+  
+
   getCardDetails: async (cardId) => {
     try {
       const response = await axios.get(
