@@ -18,7 +18,51 @@ const TrelloService = {
       return [];
     }
   },
+  createBoard: async (workspaceId, boardName) => {
+    try {
+      const response = await axios.post(
+        `${API_BASE_URL}/boards?key=${TRELLO_API_KEY}&token=${TRELLO_TOKEN}`,
+        {
+          name: boardName,
+          idOrganization: workspaceId, 
+        }
+      );
+      return response.data;
+    } catch (error) {
+      console.error("Erreur lors de la création du tableau:", error);
+      return null;
+    }
+  },
 
+  updateBoard: async (boardId, newBoardName) => {
+    try {
+      const response = await axios.put(
+        `${API_BASE_URL}/boards/${boardId}?key=${TRELLO_API_KEY}&token=${TRELLO_TOKEN}`,
+        {
+          name: newBoardName,
+        }
+      );
+      return response.data;
+    } catch (error) {
+      console.error("Erreur lors de la mise à jour du tableau:", error);
+      return null;
+    }
+  },
+
+  deleteBoard: async (boardId) => {
+    try {
+      const response = await axios.put(
+        `${API_BASE_URL}/boards/${boardId}?key=${TRELLO_API_KEY}&token=${TRELLO_TOKEN}`,
+        {
+          closed: true, 
+        }
+      );
+      return response.data;
+    } catch (error) {
+      console.error("Erreur lors de la suppression du tableau:", error);
+      return null;
+    }
+  },
   getLists: async (boardId) => {
     try {
       const response = await axios.get(
